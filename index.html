@@ -91,7 +91,7 @@
     .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--black); transition: 0.3s; }
 
     /* ─── HERO ─── */
-    #hero {
+    #home {
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -248,6 +248,8 @@
       font-size: 0.95rem; color: var(--grey-mid);
       margin-top: 1rem; max-width: 550px;
     }
+
+    .section-tag.centered::before { display: none; }
 
     /* ─── PRACTICE AREAS ─── */
     #practice { background: var(--white); }
@@ -561,7 +563,7 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      #hero { grid-template-columns: 1fr; }
+      #home { grid-template-columns: 1fr; }
       .hero-left::before { display: none; }
       .hero-right { display: none; }
       #ip { grid-template-columns: 1fr; }
@@ -612,7 +614,7 @@
     Adv. Chintan Oza
   </a>
   <ul class="nav-links">
-    <li><a href="#hero">Home</a></li>
+    <li><a href="#home">Home</a></li>
     <li><a href="#practice">Practice Areas</a></li>
     <li><a href="#ip">IP Law</a></li>
     <li><a href="#deeds">Documentation</a></li>
@@ -625,7 +627,7 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#hero" onclick="closeMobile()">Home</a>
+  <a href="#home" onclick="closeMobile()">Home</a>
   <a href="#practice" onclick="closeMobile()">Practice Areas</a>
   <a href="#ip" onclick="closeMobile()">IP Law</a>
   <a href="#deeds" onclick="closeMobile()">Documentation</a>
@@ -634,7 +636,7 @@
 </div>
 
 <!-- ═══ HERO ═══ -->
-<section id="hero">
+<section id="home">
   <div class="hero-left">
     <div class="hero-tag fade-up">Welcome to the</div>
     <h1 class="hero-name fade-up delay-1">
@@ -721,7 +723,11 @@
     <div class="practice-card">
       <div class="pc-icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BF9000" stroke-width="1.6">
-          <text x="3" y="18" font-size="16" font-family="serif" fill="#BF9000" stroke="none">₹</text>
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+          <circle cx="12" cy="14" r="2"/>
+          <line x1="12" y1="12" x2="12" y2="10"/>
+          <line x1="12" y1="16" x2="12" y2="18"/>
         </svg>
       </div>
       <div class="pc-title">Money Recovery &amp; Cheques</div>
@@ -836,8 +842,10 @@
           <!-- TM symbol for Trade Mark Attorney -->
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BF9000" stroke-width="1.7">
             <rect x="2" y="6" width="20" height="14" rx="2"/>
-            <path d="M7 10h4M9 10v6"/>
-            <path d="M13 10l2 3 2-3M15 13v3"/>
+            <line x1="6" y1="10" x2="10" y2="10"/>
+            <line x1="8" y1="10" x2="8" y2="16"/>
+            <polyline points="12 10 14 14 16 10"/>
+            <line x1="16" y1="10" x2="16" y2="16"/>
           </svg>
         </div>
         <div>
@@ -944,7 +952,7 @@
       <p class="deeds-body">
         Adv. Chintan Oza drafts all conveyancing instruments with meticulous attention to legal accuracy, stamp duty compliance, and registration requirements under the Registration Act, 1908 and the Transfer of Property Act, 1882.
         <br/><br/>
-        Clients receive documents that are not merely legally valid, but strategically worded to anticipate and pre-empt future disputes — backed by the clarity that comes from combining legal training with a technical engineering mindset.
+        Clients receive documents that are not merely legally valid, but strategically worded to anticipate and pre-empt future disputes, backed by the clarity that comes from combining legal training with a technical engineering mindset.
       </p>
       <div class="ornament">
         <div class="ornament-line"></div>
@@ -961,10 +969,10 @@
 <!-- ═══ WHY CHOOSE ═══ -->
 <section id="why">
   <div class="section-header" style="text-align:center; max-width:600px; margin:0 auto 4rem;">
-    <div class="section-tag" style="justify-content:center;">
-      <span style="width:28px;height:1px;background:var(--gold);display:block;"></span>
+    <div class="section-tag centered" style="justify-content:center; gap:10px;">
+      <span style="width:28px;height:1px;background:var(--gold);display:block;flex-shrink:0;"></span>
       Why Choose Us
-      <span style="width:28px;height:1px;background:var(--gold);display:block;"></span>
+      <span style="width:28px;height:1px;background:var(--gold);display:block;flex-shrink:0;"></span>
     </div>
     <h2 class="section-title">The <em>Difference</em> We Bring</h2>
   </div>
@@ -973,7 +981,7 @@
     <div class="why-card">
       <div class="why-card-num">01</div>
       <div class="why-card-title">Technical + Legal Expertise</div>
-      <div class="why-card-desc">A rare combination of B.Tech. (IT) and LL.B. qualifications, enabling superior handling of patent, cyber, and technology-related matters.</div>
+      <div class="why-card-desc">A rare combination of B.Tech. (IT) and LL.B. qualifications, enabling superior handling of patent, trade mark, designs, cyber, and technology-related matters.</div>
     </div>
     <div class="why-card">
       <div class="why-card-num">02</div>
@@ -1015,7 +1023,7 @@
     <div>
       <div class="contact-info-block">
         <div class="cib-label">Advocate</div>
-        <div class="cib-value">Adv. Chintan Oza<br/>B.Tech. (I.T.), LL.B.<br/>Advocate &amp; Registered Patent Agent<br/>Patent and Trade Mark Attorney</div>
+        <div class="cib-value">Adv. Chintan Oza<br/>B.Tech. (I.T.), LL.B.<br/>Advocate and Registered Patent Agent<br/>Patent and Trade Mark Attorney</div>
       </div>
       <div class="contact-divider"></div>
       <div class="contact-info-block">
@@ -1101,7 +1109,7 @@
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-brand">
-    <span>Adv. Chintan Oza</span> &nbsp;|&nbsp;Patent Agent | Patent &amp; Trade Mark Attorney
+    <span>Adv. Chintan Oza</span> &nbsp;|&nbsp; Patent Agent |&nbsp; Patent &amp; Trade Mark Attorney
   </div>
   <div class="footer-copy">© 2026 Office of Adv. Chintan Oza. All rights reserved.</div>
   <div class="footer-links">
@@ -1111,54 +1119,13 @@
   </div>
 </footer>
 
-<script>
-  // Navbar scroll effect
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
-  });
-
-  // Hamburger menu
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  });
-  function closeMobile() {
-    document.getElementById('mobileMenu').classList.remove('open');
-  }
-
-  // Form submit handler
-  function handleSubmit() {
-    const btn = document.querySelector('.form-submit');
-    btn.textContent = '✓ Enquiry Sent — We will contact you shortly';
-    btn.style.background = '#2d7a2d';
-    btn.disabled = true;
-  }
-
-  // Intersection Observer for scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.practice-card, .ip-card, .deed-item, .why-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
-  });
-</script>
-</body>
-</html>
-<!-- Firebase SDK -->
+<!-- Firebase SDK (module) -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, collection, addDoc, serverTimestamp }
     from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  // ── PASTE YOUR FIREBASE CONFIG HERE ──────────────────────────────
+  // ── PASTE YOUR FIREBASE CONFIG HERE (see firebase-setup.md) ──────
 const firebaseConfig = {
   apiKey: "AIzaSyArgRt-Xc8jgRX_OEl4qgl9_sp6ZdHqdPc",
   authDomain: "office-of-adv-chintan-oza.firebaseapp.com",
@@ -1174,12 +1141,12 @@ const firebaseConfig = {
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
 
-  // ── Navbar scroll effect ──────────────────────────────────────────
+  // Navbar scroll effect
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // ── Hamburger menu ────────────────────────────────────────────────
+  // Hamburger menu
   document.getElementById('hamburger').addEventListener('click', () => {
     document.getElementById('mobileMenu').classList.toggle('open');
   });
@@ -1187,7 +1154,7 @@ const firebaseConfig = {
     document.getElementById('mobileMenu').classList.remove('open');
   };
 
-  // ── Intersection Observer for scroll animations ───────────────────
+  // Scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1196,7 +1163,6 @@ const firebaseConfig = {
       }
     });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.practice-card, .ip-card, .deed-item, .why-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
@@ -1204,20 +1170,17 @@ const firebaseConfig = {
     observer.observe(el);
   });
 
-  // ── Form Submit → Firebase ────────────────────────────────────────
+  // Form Submit → Firebase Firestore
   window.handleSubmit = async function() {
-    const btn = document.querySelector('.form-submit');
-
-    // Collect form values
+    const btn     = document.querySelector('.form-submit');
     const name    = document.querySelector('input[placeholder="Full Name"]').value.trim();
     const phone   = document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value.trim();
     const email   = document.querySelector('input[type="email"]').value.trim();
     const area    = document.querySelector('select').value;
     const message = document.querySelector('textarea').value.trim();
 
-    // Basic validation
     if (!name || !phone) {
-      alert('Please fill in at least your name and contact number.');
+      alert('Please enter at least your name and contact number.');
       return;
     }
 
@@ -1226,25 +1189,20 @@ const firebaseConfig = {
 
     try {
       await addDoc(collection(db, 'enquiries'), {
-        name,
-        phone,
-        email,
+        name, phone, email,
         practiceArea: area,
         message,
         submittedAt: serverTimestamp(),
         source: 'website'
       });
-
       btn.textContent = '✓ Enquiry Sent — We will contact you shortly';
       btn.style.background = '#2d7a2d';
-
-      // Clear form
+      // Clear fields
       document.querySelector('input[placeholder="Full Name"]').value = '';
       document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value = '';
       document.querySelector('input[type="email"]').value = '';
       document.querySelector('select').selectedIndex = 0;
       document.querySelector('textarea').value = '';
-
     } catch (err) {
       console.error('Firebase error:', err);
       btn.textContent = '✗ Something went wrong. Please try again.';
@@ -1253,3 +1211,5 @@ const firebaseConfig = {
     }
   };
 </script>
+</body>
+</html>
