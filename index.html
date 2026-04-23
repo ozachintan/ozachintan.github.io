@@ -1037,7 +1037,7 @@
       <div class="contact-divider"></div>
       <div class="contact-info-block">
         <div class="cib-label">Office Hours</div>
-        <div class="cib-value">Monday – Saturday<br/>10:00 AM – 6:00 PM</div>
+        <div class="cib-value">Monday – Friday<br/>9:00 AM – 5:00 PM</div>
       </div>
       <div class="contact-divider"></div>
       <div class="contact-info-block">
@@ -1101,9 +1101,9 @@
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-brand">
-    <span>Adv. Chintan Oza</span> &nbsp;|&nbsp; Patent &amp; Trade Mark Attorney
+    <span>Adv. Chintan Oza</span> &nbsp;|&nbsp;Patent Agent | Patent &amp; Trade Mark Attorney
   </div>
-  <div class="footer-copy">© 2025 Office of Adv. Chintan Oza. All rights reserved.</div>
+  <div class="footer-copy">© 2026 Office of Adv. Chintan Oza. All rights reserved.</div>
   <div class="footer-links">
     <a href="#practice">Services</a>
     <a href="#ip">IP Law</a>
@@ -1152,3 +1152,104 @@
 </script>
 </body>
 </html>
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // ── PASTE YOUR FIREBASE CONFIG HERE ──────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyArgRt-Xc8jgRX_OEl4qgl9_sp6ZdHqdPc",
+  authDomain: "office-of-adv-chintan-oza.firebaseapp.com",
+  projectId: "office-of-adv-chintan-oza",
+  storageBucket: "office-of-adv-chintan-oza.firebasestorage.app",
+  messagingSenderId: "902385829739",
+  appId: "1:902385829739:web:1719f5e685363a995fee2e",
+  measurementId: "G-L1V0T5SLM3"
+};
+
+  // ─────────────────────────────────────────────────────────────────
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  // ── Navbar scroll effect ──────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ── Hamburger menu ────────────────────────────────────────────────
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  window.closeMobile = function() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  };
+
+  // ── Intersection Observer for scroll animations ───────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.practice-card, .ip-card, .deed-item, .why-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // ── Form Submit → Firebase ────────────────────────────────────────
+  window.handleSubmit = async function() {
+    const btn = document.querySelector('.form-submit');
+
+    // Collect form values
+    const name    = document.querySelector('input[placeholder="Full Name"]').value.trim();
+    const phone   = document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value.trim();
+    const email   = document.querySelector('input[type="email"]').value.trim();
+    const area    = document.querySelector('select').value;
+    const message = document.querySelector('textarea').value.trim();
+
+    // Basic validation
+    if (!name || !phone) {
+      alert('Please fill in at least your name and contact number.');
+      return;
+    }
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      await addDoc(collection(db, 'enquiries'), {
+        name,
+        phone,
+        email,
+        practiceArea: area,
+        message,
+        submittedAt: serverTimestamp(),
+        source: 'website'
+      });
+
+      btn.textContent = '✓ Enquiry Sent — We will contact you shortly';
+      btn.style.background = '#2d7a2d';
+
+      // Clear form
+      document.querySelector('input[placeholder="Full Name"]').value = '';
+      document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value = '';
+      document.querySelector('input[type="email"]').value = '';
+      document.querySelector('select').selectedIndex = 0;
+      document.querySelector('textarea').value = '';
+
+    } catch (err) {
+      console.error('Firebase error:', err);
+      btn.textContent = '✗ Something went wrong. Please try again.';
+      btn.style.background = '#a00000';
+      btn.disabled = false;
+    }
+  };
+</script>
