@@ -1266,46 +1266,62 @@ const firebaseConfig = {
     observer.observe(el);
   });
 
-  // Form Submit → Firebase Firestore
-  window.handleSubmit = async function() {
-    const btn     = document.querySelector('.form-submit');
-    const name    = document.querySelector('input[placeholder="Full Name"]').value.trim();
-    const phone   = document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value.trim();
-    const email   = document.querySelector('input[type="email"]').value.trim();
-    const area    = document.querySelector('select').value;
-    const message = document.querySelector('textarea').value.trim();
+window.handleSubmit = async function() {
+  const btn     = document.querySelector('.form-submit');
+  const name    = document.querySelector('input[placeholder="Full Name"]').value.trim();
+  const phone   = document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value.trim();
+  const email   = document.querySelector('input[type="email"]').value.trim();
+  const area    = document.querySelector('select').value;
+  const message = document.querySelector('textarea').value.trim();
 
-    if (!name || !phone) {
-      alert('Please enter at least your name and contact number.');
-      return;
-    }
+  if (!name || !phone) {
+    alert('Please enter at least your name and contact number.');
+    return;
+  }
 
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
 
-    try {
-      await addDoc(collection(db, 'enquiries'), {
-        name, phone, email,
-        practiceArea: area,
-        message,
-        submittedAt: serverTimestamp(),
-        source: 'website'
-      });
-      btn.textContent = '✓ Enquiry Sent — We will contact you shortly';
-      btn.style.background = '#2d7a2d';
-      // Clear fields
-      document.querySelector('input[placeholder="Full Name"]').value = '';
-      document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value = '';
-      document.querySelector('input[type="email"]').value = '';
-      document.querySelector('select').selectedIndex = 0;
-      document.querySelector('textarea').value = '';
-    } catch (err) {
-      console.error('Firebase error:', err);
-      btn.textContent = '✗ Something went wrong. Please try again.';
-      btn.style.background = '#a00000';
-      btn.disabled = false;
-    }
-  };
+  try {
+    // 1. Save to Firestore
+    await addDoc(collection(db, 'enquiries'), {
+      name, phone, email,
+      practiceArea: area,
+      message,
+      submittedAt: serverTimestamp(),
+      source: 'website'
+    });
+
+    // 2. Send email notification via EmailJS
+    await emailjs.send(
+      'YOUR_SERVICE_ID',    // e.g. service_xxxxxxx
+      'YOUR_TEMPLATE_ID',   // e.g. template_xxxxxxx
+      {
+        from_name:     name,
+        phone:         phone || 'Not provided',
+        from_email:    email || 'Not provided',
+        practice_area: area  || 'Not specified',
+        message:       message || 'No message provided'
+      }
+    );
+
+    btn.textContent = '✓ Enquiry Sent — We will contact you shortly';
+    btn.style.background = '#2d7a2d';
+
+    // Clear fields
+    document.querySelector('input[placeholder="Full Name"]').value = '';
+    document.querySelector('input[placeholder="+91 XXXXX XXXXX"]').value = '';
+    document.querySelector('input[type="email"]').value = '';
+    document.querySelector('select').selectedIndex = 0;
+    document.querySelector('textarea').value = '';
+
+  } catch (err) {
+    console.error('Error:', err);
+    btn.textContent = '✗ Something went wrong. Please try again.';
+    btn.style.background = '#a00000';
+    btn.disabled = false;
+  }
+};
 </script>
 </body>
 </html>
